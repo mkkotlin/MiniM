@@ -5,6 +5,14 @@ body {
 }
 .product_list_table{
     margin: 40px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.product_list_table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #4CAF50; /* reapply header color */
+  z-index: 1;
 }
 table {
     width: 100%;
