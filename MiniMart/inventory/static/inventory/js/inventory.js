@@ -1,13 +1,14 @@
 $(document).ready(function () {
-    console.log('jQuery');
+    //strat of hide and show
     $('#add_product').click(function (e){
-    $('#add_p_form').slideToggle();
+    $('#add_p_form').slideToggle(); //hide and show
 
     const text = $(this).text();
     $(this).text(text === '➕Add Items'? '➖Hide Form':'➕Add Items')
     });
+    //end of hide and show
 
-    
+    // start of form submit
     $('#submit').click(function (e){
         e.preventDefault();
 
@@ -32,15 +33,16 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: "/inventory/add/",
-            data:$('#form_data').serialize(),
+            data:$('#form_data').serialize(),  //direct data from form
             success: function(response){
                 alert(response.success)
-                $("#form_data")[0].reset();
+                $("#form_data")[0].reset(); //reset field to none
             },
             error: function(xhr){
-                const err = JSON.parse(xhr.responseText);
-                alert(err.message || 'Something went wrong' + xhr.status, xhr.readyState)
+                const err = JSON.parse(xhr.responseText);  //to read message
+                alert(err.message || 'Something went wrong' + xhr.status, xhr.readyState) //to read status and cycle of ajax
             }
         })
     });
+     // start of form submit
 });
