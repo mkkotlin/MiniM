@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'inventory/css/styles.css' %}">
+    <title>Inventory</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'inventory/js/inventory.js' %}"></script>
+</head>
+<body>
+    <div class="product_list_table">
+        <table>
+            <caption>Product Inventory</caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Cost Price (₹)</th>
+                <th>Selling Price (₹)</th>
+                <th>Created At</th>
+            </tr>
+            </thead>
+            <tbody>
+             {% for p in products %}
+            <tr>
+                <td>{{p.name}}</td>
+                <td>{{p.category}}</td>
+                <td>{{p.stock}}</td>
+                <td>{{p.cost_price}}</td>
+                <td>{{p.selling_price}}</td>
+                <td>{{p.created_at}}</td>
+            </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="add_product_form">
+        <a id="add_product">➕Add Items</a>
+        <hr>
+        <form action="/inventory/add/" method="POST" style="display: none;" id="add_p_form">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="category">Category:</label><br>
+            <input type="text" id="category" name="category" required><br><br>
+
+            <label for="stock">Stock:</label><br>
+            <input type="number" id="stock" name="stock" min="0" required><br><br>
+
+            <label for="cost_price">Cost Price (₹):</label><br>
+            <input type="number" id="cost_price" name="cost_price" step="0.01" min="0" required><br><br>
+
+            <label for="selling_price">Selling Price (₹):</label><br>
+            <input type="number" id="selling_price" name="selling_price" step="0.01" min="0" required><br><br>
+
+            <label for="created_at">Created At:</label><br>
+            <input type="datetime-local" id="created_at" name="created_at" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+</body>
+</html>
