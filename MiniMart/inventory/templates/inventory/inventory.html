@@ -44,7 +44,7 @@
     </div>
     <div class="add_product_form" style="display: none;" id="add_p_form">
         
-        <form>
+        <form id="form_data">
             {% csrf_token %}
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
@@ -60,11 +60,9 @@
 
             <label for="selling_price">Selling Price (₹):</label><br>
             <input type="number" id="selling_price" name="selling_price" step="0.01" min="0" required><br><br>
-
-            <label for="created_at">Created At:</label><br>
-            <input type="datetime-local" id="created_at" name="created_at" required><br><br>
+            <button id="submit">Submit</button>
         </form>
-        <button id="submit">Submit</button>
+        
     </div>
     
 </body>
