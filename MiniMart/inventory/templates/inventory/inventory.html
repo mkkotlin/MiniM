@@ -38,10 +38,14 @@
         </table>
     </div>
     <hr>
-    <div class="add_product_form">
+    <div style="margin: 40px;">
         <a id="add_product">➕Add Items</a>
         <hr>
-        <form action="/inventory/add/" method="POST" style="display: none;" id="add_p_form">
+    </div>
+    <div class="add_product_form" style="display: none;" id="add_p_form">
+        
+        <form>
+            {% csrf_token %}
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
 
@@ -59,9 +63,8 @@
 
             <label for="created_at">Created At:</label><br>
             <input type="datetime-local" id="created_at" name="created_at" required><br><br>
-
-            <button type="submit">Submit</button>
         </form>
+        <button id="submit">Submit</button>
     </div>
     
 </body>
