@@ -44,5 +44,32 @@ $(document).ready(function () {
             }
         })
     });
-     // start of form submit
+     // end of form submit
+
+
+    // start of delete button
+        $('.delete-btn').on('click',function(e){
+        e.preventDefault(); // Prevent default action of the button
+        const pId = $(this).data('id')
+        if (!confirm('Are you sure you want to delete this item?')) {
+            return; // Exit if user cancels
+        }
+        // delete url request
+        $.ajax({
+            type: 'POST',
+            url: `/inventory/delete/${pId}/`,
+            headers: {
+            'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function(response) {
+            alert(response.success || 'Item deleted successfully');
+            location.reload(); // Reload to update the list
+            },
+            error: function(xhr) {
+            const err = JSON.parse(xhr.responseText);
+            alert(err.message || 'Failed to delete item');
+            }
+        });
+    })
 });
+

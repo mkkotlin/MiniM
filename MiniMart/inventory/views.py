@@ -32,4 +32,11 @@ def add_product(request):
     return JsonResponse({'status':'error', 'message':'Invalid request method'},status=405)
 
 def delete_product(request, id):
-    pass
+    try:
+        product = Product.objects.get(id=id)
+        product.delete()
+        return JsonResponse({'status':'success', 'message':'Product deleted successfully'})
+    except Product.DoesNotExist:
+        return JsonResponse({'status':'error', 'message':'Product not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
