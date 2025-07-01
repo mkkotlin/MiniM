@@ -1,11 +1,12 @@
-<tr id="row-{{product.id}}">
-    <td>{{product.name}}</td>
-    <td>{{product.category}}</td>
-    <td>{{product.stock}}</td>
-    <td>{{product.cost_price}}</td>
-    <td>{{product.selling_price}}</td>
-    <td>{{product.created_at}}</td>
+<tr id="row-{{p.id}}">
+    <td>{{p.name}}</td>
+    <td>{{p.category}}</td>
+    <td>{{p.stock}}</td>
+    <td>{{p.cost_price}}</td>
+    <td>{{p.selling_price}}</td>
+    <td>{{p.created_at}}</td>
     <td>
-        <button class="delete-btn" id="delete-{{product.id}}" data-id="{{product.id}}">Delete</button>
+        <button class="edit-btn" id="edit-{{p.id}}" data-id="{{p.id}}">Edit</button>
+        <button class="delete-btn" id="delete-{{p.id}}" data-id="{{p.id}}">Delete</button>
     </td>
 </tr>
