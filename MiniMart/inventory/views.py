@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from . models import Product
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -22,9 +23,10 @@ def add_product(request):
                 return JsonResponse({'status':'error','message':'sell price cant be smaller than cost price'}, status=400)
             if selling_price <=0 or cost_price <= 0:
                 return JsonResponse({'status':'error','message':'price must be more than 0'}, status=400) 
-
+            
             product = Product.objects.create(name=name, category=category, stock=stock, cost_price=cost_price, selling_price=selling_price)
-            return JsonResponse({'success':f'added to inventory with p_id: {product.id}'})
+            rendred_row = render_to_string('inventory/product_row.html',{'product':product})
+            return JsonResponse({'success':f'added to inventory with p_id: {product.id}', 'row_html':rendred_row})
         except (ValueError, TypeError)as e:
             return JsonResponse({'status':'error', 'message':f'invalid input: {e}'}, status=400)
         except Exception as e:

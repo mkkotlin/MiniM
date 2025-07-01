@@ -36,6 +36,7 @@ $(document).ready(function () {
             data:$('#form_data').serialize(),  //direct data from form
             success: function(response){
                 alert(response.success)
+                $('.add_update').prepend(response.row_html) //prepend to add new row at the top
                 $("#form_data")[0].reset(); //reset field to none
             },
             error: function(xhr){
@@ -63,7 +64,8 @@ $(document).ready(function () {
             },
             success: function(response) {
             alert(response.success || 'Item deleted successfully');
-            location.reload(); // Reload to update the list
+            // Remove the row of the deleted product
+            $(`#delete-${pId}`).closest('tr').remove();  //close the row of the deleted product closest() it finds the row that contains the button 
             },
             error: function(xhr) {
             const err = JSON.parse(xhr.responseText);
