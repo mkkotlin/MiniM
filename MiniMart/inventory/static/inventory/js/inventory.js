@@ -65,7 +65,7 @@ $(document).ready(function () {
             success: function(response) {
             alert(response.success || 'Item deleted successfully');
             // Remove the row of the deleted product
-            $(`#delete-${pId}`).closest('tr').remove();  //close the row of the deleted product closest() it finds the row that contains the button 
+            $(`#delete-${pId}`).closest('tr').remove();   //close the row of the deleted product closest() it finds the row that contains the button 
             },
             error: function(xhr) {
             const err = JSON.parse(xhr.responseText);
