@@ -59,4 +59,9 @@ def delete_product(request, id):
         return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
     
 def update_product(request, id):
+    """ Update a product's details by its ID.
+    Args:
+        request: The HTTP request object.
+        id (int): The ID of the product to update.
+    """
     pass
