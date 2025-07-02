@@ -49,7 +49,7 @@ $(document).ready(function () {
 
 
     // start of delete button
-        $('.delete-btn').on('click',function(e){
+        $(document).on('click','.delete-btn',function(e){
         e.preventDefault(); // Prevent default action of the button
         const pId = $(this).data('id')
         if (!confirm('Are you sure you want to delete this item?')) {
