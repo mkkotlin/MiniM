@@ -74,5 +74,12 @@ $(document).ready(function () {
         });
     })
     // start of delete button
+
+    // start of update button
+    $(document).on('click', '.edit-btn', function(e){
+        alert('Update button clicked');
+        e.preventDefault(); // Prevent default action of the button
+    })
+    // end of update button
 });
 

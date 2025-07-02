@@ -6,11 +6,21 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 def inventory_list(request):
+    """Render the inventory list page.
+    Args:
+        request: The HTTP request object.
+    Returns:
+        HttpResponse: Rendered HTML page with the list of products."""
     products = Product.objects.all().order_by('-created_at')
     return render(request,'inventory/inventory.html', {'products':products})
     
 
 def add_product(request):
+    """Add a new product to the inventory.
+    Args:
+        request: The HTTP request object.
+    Returns:
+        JsonResponse: A JSON response indicating success or failure."""
     if request.method == 'POST':
         try:
             name = request.POST['name']
@@ -34,6 +44,11 @@ def add_product(request):
     return JsonResponse({'status':'error', 'message':'Invalid request method'},status=405)
 
 def delete_product(request, id):
+    """"Delete a product by its ID.
+    Args:
+        request: The HTTP request object.
+        id (int): The ID of the product to delete.
+    """
     try:
         product = Product.objects.get(id=id)
         product.delete()
@@ -42,3 +57,6 @@ def delete_product(request, id):
         return JsonResponse({'status':'error', 'message':'Product not found'}, status=404)
     except Exception as e:
         return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
+    
+def update_product(request, id):
+    pass
