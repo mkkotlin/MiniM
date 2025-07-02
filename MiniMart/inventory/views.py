@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from . models import Product
 from django.template.loader import render_to_string
 
+
 # Create your views here.
 
 def inventory_list(request):
@@ -57,11 +58,48 @@ def delete_product(request, id):
         return JsonResponse({'status':'error', 'message':'Product not found'}, status=404)
     except Exception as e:
         return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
-    
+  
 def update_product(request, id):
     """ Update a product's details by its ID.
     Args:
         request: The HTTP request object.
         id (int): The ID of the product to update.
     """
-    pass
+    try:
+        if request.method == 'POST':
+
+            # capture respective field data
+            name = request.POST['name']
+            category = request.POST['category']
+            stock = int(request.POST['stock'])
+            cost_price =float(request.POST['cost_price'])
+            selling_price = float(request.POST['selling_price'])
+
+            # input validation
+            if stock < 0:
+                return JsonResponse({'status':'error', 'message':'Stock cannot be in negative'}, status=400)
+            
+            if cost_price <=0:
+                return JsonResponse({'status':'error', 'message':'cost price cannot be in negative or zero'}, status=400)
+            
+            if selling_price <=0:
+                return JsonResponse({'status':'error', 'message':'sell price cannot be in negative or zero'}, status=400)
+            
+            if cost_price > selling_price:
+                return JsonResponse({'status':'error', 'message':'sell price must more than cost price'}, status=400)
+            
+            product = Product.objects.get(id=id)
+            product.name = name
+            product.category = category
+            product.stock = stock
+            product.cost_price = cost_price
+            product.selling_price = selling_price
+            product.save()
+            return JsonResponse({'status':'success', 'message':'Product updated successfully'})
+        else:
+            return JsonResponse({'status':'error', 'message':'Invalid request'}, status=405)
+    except Product.DoesNotExist:
+        return JsonResponse({'status':'error', 'message':'Product not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
+    
