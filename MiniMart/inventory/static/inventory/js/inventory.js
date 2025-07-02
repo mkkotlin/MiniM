@@ -73,5 +73,6 @@ $(document).ready(function () {
             }
         });
     })
+    // start of delete button
 });
 
