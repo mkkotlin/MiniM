@@ -1,11 +1,11 @@
 <tr id="row-{{p.id}}">
-    <td>{{p.name}}</td>
-    <td>{{p.category}}</td>
-    <td>{{p.stock}}</td>
-    <td>{{p.cost_price}}</td>
-    <td>{{p.selling_price}}</td>
-    <td>{{p.created_at}}</td>
-    <td>
+    <td class="name">{{p.name}}</td>
+    <td class="category">{{p.category}}</td>
+    <td class="stock">{{p.stock}}</td>
+    <td class="cost_price">{{p.cost_price}}</td>
+    <td class="selling_price">{{p.selling_price}}</td>
+    <td class="created_at">{{p.created_at}}</td>
+    <td class="action">
         <button class="edit-btn" id="edit-{{p.id}}" data-id="{{p.id}}">Edit</button>
         <button class="delete-btn" id="delete-{{p.id}}" data-id="{{p.id}}">Delete</button>
     </td>
