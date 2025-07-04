@@ -119,86 +119,9 @@ $(document).ready(function () {
         });
     });
 
-    // --- Cancel Button ---
-    $(document).on('click', '.cancel-btn', function(e){
-        e.preventDefault();
-        let id = $(this).data('id');
-        let row = $(this).closest('tr');
-        // Optionally, reload the page or re-render the row with original values
-        location.reload();
-    });
-
-
-    // --- Add Multiple Products Button ---
-    $(document).on('click', '.add_multi_form_toggle', function (e) {
-        e.preventDefault();
-        $('.add_multi_form').slideToggle();
-        const text = $(this).text();
-        $(this).text(text === '➕Add Multiple Products' ? '➖Hide Form' : '➕Add Multiple Products');
-        if ($('.add_multi_form').is(':visible')) {
-            $('.add_multi_form').show();
-        } else {
-            $('.add_multi_form').hide();
-        }
-    });
-    // Add more form functionality here
-    // --- Add More Form Rows ---
-    
-    $(document).on('click', '#add_multiple', function (e) {
-        e.preventDefault();
-        const newRow = `
-            <div class="form-row">
-                <input type="text" name="name_multiple[]" placeholder="Name" required>
-                <input type="text" name="category_multiple[]" placeholder="Category" required>
-                <input type="number" name="stock_multiple[]" placeholder="Stock" required>
-                <input type="number" name="cost_price_multiple[]" placeholder="Cost Price" required>
-                <input type="number" name="selling_price_multiple[]" placeholder="Selling Price" required>
-                <button class="remove_row">Remove</button>
-            </div>`;
-        $('#form_data_multiple').append(newRow);
-    });
-
-    // --- Remove Form Row ---
-    $(document).on('click', '.remove_row', function (e) {
-        e.preventDefault();
-        $(this).closest('.form-row').remove();
-    });
-
-    // --- Submit Multiple Products Form ---
-    $(document).on('click', '#submit_multiple', function (e) {
-        e.preventDefault();
-        let isValid = true;
-        $("#form_data_multiple :input[required]").each(function () {
-            if (!$(this).val().trim()) {
-                isValid = false;
-                $(this).css("border", "1px solid red");
-            } else {
-                $(this).css("border", "");
-            }
-        });
-        if (!isValid) {
-            alert("Please fill in all required fields.");
-            return;
-        }
-        $.ajax({
-            type: 'POST',
-            url: "/inventory/multi_add/",
-            data: $('#form_data_multiple').serialize(),
-            success: function(response) {
-                alert(response.success);
-                $('.add_update').prepend(response.row_html);
-                $("#form_data_multiple")[0].reset();
-            },
-            error: function(xhr) {
-                const err = JSON.parse(xhr.responseText);
-                alert(err.message || 'Something went wrong' + xhr.status, xhr.readyState);
-            }
-        });
-    }  )
-
 });
 
-// multi form or dynamic form submission
+// multi form or dynamic form
 $(document).ready(function () {
   // Show form
   $('#show-multi-form').click(function () {
