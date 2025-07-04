@@ -130,6 +130,26 @@ $(document).ready(function () {
 
   // Add new form
   $('#add-more').click(function () {
+    /**
+     * HTML string representing a product input form.
+     * The form includes fields for product name, category, stock, cost price, and selling price,
+     * as well as a button to remove the form.
+     *
+     * @type {string}
+     */
+    /**
+     * HTML template string representing a product input form.
+     *
+     * The form includes the following fields:
+     * - Name: Text input for the product name (required).
+     * - Category: Text input for the product category (required).
+     * - Stock: Number input for the available stock quantity (required).
+     * - Cost Price: Number input for the product's cost price (required).
+     * - Selling Price: Number input for the product's selling price (required).
+     * - Remove Button: Button to remove the form entry.
+     *
+     * @constant {string} form - HTML markup for dynamically adding a product entry form in the inventory management UI.
+     */
     const form = `
       <div class="product-form">
         <input type="text" name="name" placeholder="Name" required>
