@@ -65,3 +65,10 @@ caption {
 .edit-btn:hover {
     background-color: #2196F3;
 }
+#form_data_multiple {
+    display: flex;
+   align-items: center;
+}
+.add_multi_form_toggle:hover{
+    cursor: pointer;
+}

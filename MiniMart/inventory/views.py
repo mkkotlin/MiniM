@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from urllib3 import request
 from . models import Product
 from django.template.loader import render_to_string
+import json
 
 
 # Create your views here.
@@ -102,4 +104,46 @@ def update_product(request, id):
         return JsonResponse({'status':'error', 'message':'Product not found'}, status=404)
     except Exception as e:
         return JsonResponse({'status':'error', 'message':f'Something went wrong: {e}'}, status=500)
+
+
+
+def add_multiple_products(request):
+    """Add multiple products to the inventory.
+    Args:
+        request: The HTTP request object.
+    Returns:
+        JsonResponse: A JSON response indicating success or failure."""
     
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            products = data.get('products', [])
+            for item in products:
+                name = item.get('name')
+                category = item.get('category')
+                stock = int(item.get('stock', 0))
+                cost_price = float(item.get('cost_price', 0))
+                selling_price = float(item.get('selling_price', 0))
+
+                if stock < 0:
+                    return JsonResponse({'status': 'error', 'message': 'Stock cannot be negative'}, status=400)
+                if cost_price <= 0:
+                    return JsonResponse({'status': 'error', 'message': 'Cost Price must be positive'}, status=400)
+                if selling_price <= 0:
+                    return JsonResponse({'status': 'error', 'message': 'Selling Price must be positive'}, status=400)
+                if cost_price > selling_price:
+                    return JsonResponse({'status': 'error', 'message': 'Selling Price must be greater than Cost Price'}, status=400)
+
+                Product.objects.create(
+                    name=name,
+                    category=category,
+                    stock=stock,
+                    cost_price=cost_price,
+                    selling_price=selling_price
+                )
+            return JsonResponse({'status': 'success', 'message': 'Products added successfully'}, status=200)
+        except (ValueError, TypeError, KeyError) as e:
+            return JsonResponse({'status': 'error', 'message': f'Invalid input: {e}'}, status=400)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'Something went wrong: {e}'}, status=500)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
