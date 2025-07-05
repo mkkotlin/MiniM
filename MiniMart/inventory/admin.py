@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Sale
+from . models import Product
 
 # Register your models here.
 
@@ -10,9 +10,9 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name','category')
 # admin.site.register(Product)
 
-@admin.register(Sale)
-class SaleAdmin(admin.ModelAdmin):
-    list_display = ('product','quantity','sale_price', 'date')
-    list_filter = ('product','quantity','product__category', 'date')
-    search_fields = ('product__name',)
-# admin.site.register(Sale)
+# @admin.register(Sale)
+# class SaleAdmin(admin.ModelAdmin):
+#     list_display = ('product','quantity','sale_price', 'date')
+#     list_filter = ('product','quantity','product__category', 'date')
+#     search_fields = ('product__name',)
+# # admin.site.register(Sale)
