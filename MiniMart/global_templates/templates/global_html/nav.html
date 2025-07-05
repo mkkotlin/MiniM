@@ -1,6 +1,9 @@
-<nav>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/nav.css' %}">
+<nav class="navbar">
     <ul>
-        <li><a href="{% url 'inventory_list' %}">Inventory/Products</a></li>
-        <li><a href="{% url 'sales_home' %}">Sales</a></li>
+        <li><a href="{% url 'inventory_list' %}" class="{% if request.resolver_match.url_name == 'inventory_list' %}active{% endif %}">Inventory/Products</a></li>
+        <li><a href="{% url 'sales_home' %}" class="{% if  request.resolver_match.url_name == 'sales_home' %}active{% endif %}">Sales</a></li>
+        <li><a>{{request.resolver_match.url_name}}</a></li>
     </ul>
 </nav>
