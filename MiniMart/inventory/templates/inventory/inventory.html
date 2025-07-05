@@ -10,6 +10,13 @@
     <script src="{% static 'inventory/js/inventory.js' %}"></script>
 </head>
 <body>
+    <!-- Navigation -->
+    {% include 'global_html/nav.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+
     <!-- start of list display -->
     <div class="product_list_table">
         <table>
