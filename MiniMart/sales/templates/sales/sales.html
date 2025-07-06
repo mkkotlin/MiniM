@@ -11,11 +11,37 @@
     <!-- Navigation -->
     {% include 'global_html/nav.html' %}
 
-    <h1>Sales Home</h1>
 
-    {% for s in sales_list %}
-        <li>{{s}}</li>
-    {% endfor %}
+    <!-- Sales table List -->
+    <div class="sales_list">
+        <table>
+            <caption> Sales List</caption>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Sale Price</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in sales_list %}
+                <tr>
+                    <td>{{s.product}}</td>
+                    <td>{{s.quantity}}</td>
+                    <td>{{s.sale_price}}</td>
+                    <td>{{s.date}}</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
+    
 </body>
 </html>
