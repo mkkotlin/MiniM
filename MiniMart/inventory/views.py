@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from urllib3 import request
 from . models import Product
 from django.template.loader import render_to_string
 import json
