@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'sales/css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'sales/js/script.js' %}"></script>
     <title>Sales</title>
 </head>
 <body>
@@ -41,7 +43,30 @@
             </tbody>
         </table>
     </div>
+    <hr>
 
-    
+    <!-- Add single Item -->
+    <div class="add_sale">
+        <a id="add_sale_toggle">➕ Add Sale</a>
+        <hr>
+        <div class="add_sale_form" style="display: none;">
+            <form id="sale_form">
+                {% csrf_token %}
+                <label>Product:</label>
+                <select name="product">
+                    {% for p in products %}
+                    <option value="{{p.id}}">{{p.name}}</option>
+                    {% endfor %}
+                </select>
+                <label>Quantity:</label>
+                <input name="quantity" type="number" placeholder="quantity" required min="1">
+                <label>Sale price:</label>
+                <input name="sale_price" type="number" placeholder="sale price" required step="0.01" min="1">
+                <button type="submit" id="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+
 </body>
 </html>
