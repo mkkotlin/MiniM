@@ -36,4 +36,9 @@ def add_sale(request):
     return JsonResponse({'status':'error', 'message':'inavlid request'}, status=405)
 
         # Sale.objects.create(product = product, quantity = quantity, sale_price = sale_price)
-        
+
+
+def delete_sale(request, id):
+    sale = Sale.objects.get(id=id)
+    sale.delete()
+    return JsonResponse({'status':'success', 'message':f'{{id}} Sale deleetd'})
