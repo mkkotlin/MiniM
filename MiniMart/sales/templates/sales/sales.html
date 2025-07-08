@@ -27,16 +27,16 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="add_sale_list">
                 {% for s in sales_list %}
                 <tr>
-                    <td>{{s.product}}</td>
-                    <td>{{s.quantity}}</td>
-                    <td>{{s.sale_price}}</td>
-                    <td>{{s.date}}</td>
+                    <td class="product">{{s.product}}</td>
+                    <td class="quantity">{{s.quantity}}</td>
+                    <td class="sale_price">{{s.sale_price}}</td>
+                    <td class="date">{{s.date}}</td>
                     <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <button class="edit-btn" id="edit-{{s.id}}" data-id="{{s.id}}">Edit</button>
+                        <button class="delete-btn" id="delete-{{s.id}}" data-id="{{s.id}}">Delete</button>
                     </td>
                 </tr>
                 {% endfor %}
