@@ -67,6 +67,11 @@ $(document).ready(function () {
         e.preventDefault();
         let id = $(this).data('id');
         let row = $(this).closest('tr');
+
+        const originalHTML = row.html();
+        row.data('original-html', originalHTML);
+
+
         let name = row.find('.name').text();
         let category = row.find('.category').text();
         let stock = row.find('.stock').text();
@@ -118,6 +123,17 @@ $(document).ready(function () {
             }
         });
     });
+
+    // --- Cancel Button ---
+    $(document).on('click', '.cancel-btn', function(e){
+      e.preventDefault();
+      const row = $(this).closest('tr');
+        const originalHTML = row.data('original-html');
+
+        if (originalHTML) {
+            row.html(originalHTML); 
+        }
+      });
 
 });
 
