@@ -50,3 +50,22 @@ caption {
 .add_sale{
     margin: 40px;
 }
+.export-sales-container{
+    margin: 0px 0px 0px 20px;
+    display: grid;
+}
+.csv, .xls, .json {
+    text-decoration: none;
+    color: #fff;
+    background-color: #696c88;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 150px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+.csv:hover, .xls:hover, .json:hover {
+    background-color: #0011fe;
+}

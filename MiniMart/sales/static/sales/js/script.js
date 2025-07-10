@@ -125,4 +125,84 @@ $(document).ready(function(){
         });
 
     });
+
+
+
+    // Toggle the visibility of the "Add Multiple Sale" form
+    $(document).on('click', '.toggle_multi_add' ,function(){
+        const text = $(this).text()
+        $('.multi-sale-container').slideToggle();
+        $(this).text(text === '➕Add Multiple Sale'?'➖Close Form':'➕Add Multiple Sale')
+    });
+
+    // Add more fields for adding multiple sales
+    $('.add-more').click(function(e){
+        e.preventDefault();
+        console.log('Adding more sales');
+        const newSaleItem = $('#sale-form-template').html();
+        $('.form-wrapper').append(newSaleItem);
+    });
+
+
+    // Remove fields for adding multiple sales
+    $(document).on('click', '.remove', function(e){
+        console.log('Removing sale item');
+        e.preventDefault();
+        $(this).closest('.sale_form').remove();
+    });
+
+
+    $('.submit-multi-sale').click(function(e){
+        e.preventDefault();
+        const saleData = [];
+        $('.sale_form').each(function(){
+            const product = $(this).find('select[name="product[]"]').val();
+            const quantity = $(this).find('input[name="quantity[]"]').val();
+            const price = $(this).find('input[name="sale_price[]"]').val();
+            if (product && quantity && price) {
+                saleData.push({
+                    product: product,
+                    quantity: parseInt(quantity),
+                    sale_price: parseFloat(price)
+                });
+            }
+        });
+
+        console.log('Sale Data:', saleData, '\n'+ JSON.stringify(saleData));
+
+        if (saleData.length === 0) {
+            alert('Please fill in at least one sale item.');
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url:'/sales/add_multiple_sales/',
+            data: JSON.stringify(saleData),
+            headers: {
+                'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function(response){
+                alert(response.message || 'Multiple sales added successfully!');
+                $('.multi-sale-container').hide();
+                $('.form-wrapper').empty(); // Clear the form after submission
+
+                // Prepend the new rows to the sale list
+                // Assuming response.rows contains the HTML for the new sale rows
+                // console.log('Response Rows:', response.rows);
+                $('.multi-sale-container').hide();
+                $('.toggle_multi_add').text('➕Add Multiple Sale');
+                response.rows.forEach(function(row) {
+                    $('.add_sale_list').prepend(row);
+                });
+                // $('.add_sale_list').prepend(response.rows);
+            },
+            error: function(xhr){
+                const err = JSON.parse(xhr.responseText);
+                alert(err.message || 'Something went wrong' + xhr.status, xhr.readyState)
+            }
+        });
+    });
+
 });
+

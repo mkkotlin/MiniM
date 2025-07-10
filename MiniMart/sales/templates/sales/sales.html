@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'sales/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sales/css/styles.css' %} ?v={{ current_time }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'sales/js/script.js' %}"></script>
+    <script src="{% static 'sales/js/script.js' %} ?v={{ current_time }}"></script>
     <title>Sales</title>
 </head>
 <body>
@@ -67,6 +67,46 @@
         </div>
     </div>
 
+    <hr>
+    <div>
+        <button class="toggle_multi_add">➕Add Multiple Sale</button>
+
+        <div class="multi-sale-container" style="display: none;">
+            <div class="form-wrapper">
+                <div class="sale_form">
+                    <select name="product[]">
+                    {% for p in products %}
+                    <option value="{{p.id}}">{{p.name}}</option>
+                    {% endfor %}
+                    </select>
+                    <input name="quantity[]" type="number" placeholder="Quantity" class="quantity" min="1">
+                    <input name="sale_price[]" type="number" placeholder="Sale Price" class="sale_price" step="0.01" min="1">
+                    <button class="remove">Remove</button>
+                </div>   
+            </div>
+            <button class="add-more">Add More</button>
+            <button class="submit-multi-sale">Save all</button>
+        </div>
+    </div>
+<hr>
+<h3>Export Sales Data</h3>
+    <div class="export-sales-container">
+        <a href="{% url 'export_sales' 'csv' %}" class="csv">Export Sales CSV</a>
+        <a href="{% url 'export_sales' 'xls' %}" class="xls">Export Sales XLS</a>
+        <a href="{% url 'export_sales' 'json' %}" class="json">Export Sales JSON</a>
+    </div>
 
 </body>
+<script type="text/template" id="sale-form-template">
+    <div class="sale_form">
+        <select name="product[]">
+            {% for p in products %}
+            <option value="{{p.id}}">{{p.name}}</option>
+            {% endfor %}
+        </select>
+        <input name="quantity[]" type="number" placeholder="Quantity" class="quantity" min="1">
+        <input name="sale_price[]" type="number" placeholder="Sale Price" class="sale_price" step="0.01" min="1">
+        <button class="remove">Remove</button>
+    </div>
+</script>
 </html>
