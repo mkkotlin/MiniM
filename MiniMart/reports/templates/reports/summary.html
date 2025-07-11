@@ -1,0 +1,41 @@
+{% load static %}
+{% include 'global_html/nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary {{context.v}}</title>
+</head>
+<body>
+    <p>
+        Total sale: {{ context.total_sales }}
+    </p>
+    <p>
+        Total quantity: {{ context.total_quantity }}
+    </p>
+    <p>
+        Total revenue: {{ context.total_revenue }}
+    </p>
+    <hr>
+    <h4>top 5 product sales</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Total sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in context.top_products %}
+            <tr>
+                <td>{{p.product__name}}</td>
+                <td>{{p.total_sold}}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">No Sales yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
