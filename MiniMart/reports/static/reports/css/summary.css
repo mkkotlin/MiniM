@@ -1,0 +1,11 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+table {
+    margin: 40px;
+}
+.summary {
+    margin: 40px;
+    color: #ae7a7a;
+}
