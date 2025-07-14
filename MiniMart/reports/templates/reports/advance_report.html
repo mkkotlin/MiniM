@@ -1,0 +1,45 @@
+{% load static %}
+{% include 'global_html/nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'reports/css/summary.css' %}?v = {{ context.v }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'reports/js/advance_report.js' %}"></script>
+    <title>Advance Report</title>
+</head>
+<body>
+
+    <div class="filter_controls">
+        <label for="product-filter">Filter by Product:</label>
+        <select id="product-filter">
+            <option value="">Select a product</option>
+            {% for product in products %}
+                <option value="{{ product.name }}">{{ product.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="date-filter">Filter by Date:</label>
+        <input type="date" id="from-date-filter">
+        <input type="date" id="to-date-filter">
+
+        <label for="category-filter">Filter by Category:</label>
+        <select id="category-filter">
+            <option value="">Select a category</option>
+            {% for p in cat %}
+                <option value="{{ p }}">{{ p }}</option>
+            {% endfor %}
+        </select>
+        <button id="clear-filters">Clear filters</button>
+    </div>
+
+    <div class="product-list-filtered">
+        {% for p in products %}
+            <p>{{ p.name }} - {{ p.price }} - {{ p.stock }} - {{ p.created_at }}</p>
+        {% endfor %}  
+    </div>
+
+</body>
+</html>

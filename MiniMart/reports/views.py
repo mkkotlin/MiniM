@@ -1,7 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from sales.models import Sale
+from inventory.models import Product
 from django.db.models import Sum
 import random
+from django.db.models.functions import TruncDate
 
 # Create your views here.
 
@@ -21,3 +24,29 @@ def sales_summary(request):
         'v':v,
     }
     return render(request, 'reports/summary.html', {'context':context})
+
+
+def advance_report(request):
+    products = Product.objects.all()
+    cat = Product.objects.values_list('category', flat=True).distinct()
+    return render(request, 'reports/advance_report.html', {'products':products, 'cat':cat})
+
+
+def get_product_category(request, cat):
+    products = Product.objects.filter(category=cat)
+    return JsonResponse({'products': list(products.values())})
+
+def get_product_name(request, name):
+    print(name)
+    products = Product.objects.filter(name__icontains=name)
+    return JsonResponse({'products': list(products.values())})
+
+def get_product_date(request, from_date, to_date):
+    print(from_date, to_date)
+    # products = Product.objects.filter(created_at__range=[from_date, to_date])
+    products = Product.objects.annotate(day = TruncDate('created_at')).filter(day__range=[from_date, to_date])
+    return JsonResponse({'products': list(products.values())})
+
+def get_product_all(request):
+    products = Product.objects.all()
+    return JsonResponse({'products': list(products.values())})
