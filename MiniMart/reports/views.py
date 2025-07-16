@@ -23,7 +23,7 @@ def sales_summary(request):
         'top_products': top_products,
         'v':v,
     }
-    return render(request, 'reports/summary.html', {'context':context})
+    return render(request, 'reports/summary.html', {'context':context, 'v':v})
 
 
 def advance_report(request):

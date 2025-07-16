@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'reports/css/summary.css' %}?v = {{ context.v }}">
+    <link rel="stylesheet" type="text/css" href="{% static 'reports/css/advance_report.css' %}?v = {{ context.v }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'reports/js/advance_report.js' %}"></script>
     <title>Advance Report</title>
@@ -36,10 +37,61 @@
     </div>
 
     <div class="product-list-filtered">
-        {% for p in products %}
-            <p>{{ p.name }} - {{ p.price }} - {{ p.stock }} - {{ p.created_at }}</p>
-        {% endfor %}  
+           <div class="inventory-grid">
+                {% for item in products %}
+                    <div class="inventory-card">
+                        <div class="top-row">
+                        <span class="item-name">{{ item.name }}</span>
+                        <span class="category">{{ item.category }}</span>
+                        </div>
+
+                        <div class="stock-row">
+                        <strong>Stock:</strong> {{ item.stock }}
+                        </div>
+
+                        <div class="price-row">
+                        <span><strong>Cost:</strong> ₹{{ item.cost_price }}</span>
+                        <span><strong>Sell Price:</strong> ₹{{ item.selling_price }}</span>
+                        </div>
+
+                        <div class="date-row">
+                        <span>{{ item.created_at|date:"F j, Y" }} &bull; {{ item.created_at|time:"P" }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+ 
     </div>
+
+
+
+    <!--  -->
+   <!-- <div class="inventory-grid">
+        {% for item in products %}
+            <div class="inventory-card">
+                <div class="top-row">
+                <span class="item-name">{{ item.name }}</span>
+                <span class="category">{{ item.category }}</span>
+                </div>
+
+                <div class="stock-row">
+                <strong>Stock:</strong> {{ item.stock }}
+                </div>
+
+                <div class="price-row">
+                <span><strong>Cost:</strong> ₹{{ item.cost_price }}</span>
+                <span><strong>Sell Price:</strong> ₹{{ item.selling_price }}</span>
+                </div>
+
+                <div class="date-row">
+                <span>{{ item.created_at|date:"F j, Y" }} &bull; {{ item.date|time:"P" }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div> -->
+
+
+    <!--  -->
 
 </body>
 </html>

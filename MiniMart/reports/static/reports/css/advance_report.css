@@ -1,0 +1,124 @@
+/* .report-wrapper {
+background-color: #d4cccc;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.report-card {
+  background-color: #fdfdfd;
+  border-left: 5px solid #008080;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 14px 16px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease;
+}
+
+.report-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.item-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.item-meta {
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.item-meta .price {
+  font-weight: bold;
+  color: #007a5e;
+}
+
+.item-meta .date {
+  font-style: italic;
+} */
+/*  */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.inventory-card {
+  background-color: #fefefe;
+  border-left: 5px solid #147EFB;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.inventory-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.category {
+  background: #e6f2ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #147EFB;
+}
+
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.date-row {
+  font-size: 0.85rem;
+  color: #777;
+  font-style: italic;
+}
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #444;
+  margin: 4px 0 8px;
+}
+
+.stock-row {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+@media (max-width: 480px) {
+  .price-row {
+    flex-direction: column;
+  }
+}
+body {
+  background-color: #faf8f4; /* or whichever color you choose */
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
