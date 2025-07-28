@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'reports/css/summary.css' %}?v = {{ context.v }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Summary {{context.v}}</title>
 </head>
@@ -42,5 +44,43 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: '/reports/chart_test/',
+                success: function(data){
+                    const ctx = document.getElementById('chartTest').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.categories,
+                            datasets:[{label: 'Products per category',data:data.counts,
+                                backgroundColor: [
+                                    '#4dc9f6', '#f67019', '#f53794', '#537bc4', '#acc794'
+                                ],
+                                borderWidth:1
+                            }]
+                        },
+                        options:{
+                            responsive: false,
+                            plugins:{
+                                legend: {display:false},
+                                title:{
+                                    display:true,
+                                    text:'Inventory by Category'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    })
+                },
+            });
+        });
+    </script>
+    <canvas id="chartTest" style="height: 400px; width: 600px;"></canvas>
 </body>
 </html>

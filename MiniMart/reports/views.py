@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from sales.models import Sale
 from inventory.models import Product
-from django.db.models import Sum
+from django.db.models import Sum, Count
 import random
 from django.db.models.functions import TruncDate
 import xlwt
@@ -96,3 +96,10 @@ def export_filtered_products(request):
         worksheet.write(row_num, 5, product.created_at.strftime('%Y-%m-%d %H:%M:%S'))
     workbook.save(response)
     return response
+
+def chart_test(request):
+    # This view is for testing the chart rendering
+    data = Product.objects.values('category').annotate(count=Count('id'))
+    categories = [item['category'] for item in data]
+    counts = [item['count'] for item in data]
+    return JsonResponse({'categories': categories, 'counts': counts})
