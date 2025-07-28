@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'reports/css/summary.css' %}?v = {{ context.v }}">
     <link rel="stylesheet" type="text/css" href="{% static 'reports/css/advance_report.css' %}?v = {{ context.v }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'reports/js/advance_report.js' %}"></script>
+    <script src="{% static 'reports/js/advance_report.js' %}?v={{ context.v }}"></script>
     <title>Advance Report</title>
 </head>
 <body>
@@ -92,6 +92,9 @@
 
 
     <!--  -->
-
+<div>
+    <a href="{% url 'export_filtered_products' %}">Export Filtered Products</a>
+    <a id="export-excel" href="#">Export to Excel</a>
+</div>
 </body>
 </html>

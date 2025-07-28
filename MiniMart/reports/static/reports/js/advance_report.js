@@ -77,4 +77,28 @@ $(document).ready(function() {
         });
     });
 
+    $('#export-excel').on('click', function(e) {
+        e.preventDefault();
+        const category = $('#category-filter').val();
+        const product = $('#product-filter').val();
+        const fromDate = $('#from-date-filter').val();
+        const toDate = $('#to-date-filter').val();
+        let url = '/reports/export_filtered_products/?';
+        // console.log(category, product, fromDate, toDate);
+        if (category) {
+            url += `category=${category}&`;
+        }
+        if (product) {
+            url += `name=${product}&`;
+        }
+        if (fromDate) {
+            url += `from_date=${fromDate}&`;
+        }
+        if (toDate) {
+            url += `to_date=${toDate}&`;
+        }
+        url = url.slice(0, -1); // Remove trailing '&'
+        window.location.href = url;
+    });
+
 });
